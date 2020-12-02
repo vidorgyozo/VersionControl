@@ -19,8 +19,7 @@ namespace UserMaintenance.sln
         {
             InitializeComponent();
 
-            lNameLabel.Text = Resource1.LastName;
-            fNameLabel.Text = Resource1.FirstName;
+            fullNameLabel.Text = Resource1.FullName;
             addButton.Text = Resource1.Add;
 
             usersListBox.DataSource = _users;
@@ -33,8 +32,7 @@ namespace UserMaintenance.sln
         private void AddButton_Click(object sender, EventArgs e)
         {
             User u = new User();
-            u.LastName = lNameTextBox.Text;
-            u.FirstName = fNameTextBox.Text;
+            u.FullName = fullNameTextBox.Text;
             _users.Add(u);
         }
     }
