@@ -23,6 +23,7 @@ namespace UserMaintenance.sln
             fullNameLabel.Text = Resource1.FullName;
             addButton.Text = Resource1.Add;
             writeToFileButton.Text = Resource1.WriteToFile;
+            deleteButton.Text = Resource1.Delete;
 
             usersListBox.DataSource = _users;
             usersListBox.ValueMember = "ID";
@@ -30,6 +31,15 @@ namespace UserMaintenance.sln
 
             addButton.Click += AddButton_Click;
             writeToFileButton.Click += WriteToFileButton_Click;
+            deleteButton.Click += DeleteButton_Click;
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            if (_users.Count > 0)
+            {
+                _users.RemoveAt(usersListBox.SelectedIndex);
+            }
         }
 
         private void WriteToFileButton_Click(object sender, EventArgs e)
