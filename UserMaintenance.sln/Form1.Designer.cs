@@ -1,4 +1,4 @@
-﻿namespace UserMaintenanceXNRMXI
+﻿namespace UserMaintenance.sln
 {
     partial class Form1
     {

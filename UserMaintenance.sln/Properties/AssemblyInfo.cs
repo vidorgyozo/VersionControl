@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("UserMaintenanceXNRMXI")]
+[assembly: AssemblyTitle("UserMaintenance.sln")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("UserMaintenanceXNRMXI")]
+[assembly: AssemblyProduct("UserMaintenance.sln")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8d461464-0f5a-455e-bd84-dfe7f10ae2f3")]
+[assembly: Guid("3333f6c1-7530-4542-8351-7084257cbaca")]
 
 // Version information for an assembly consists of the following four values:
 //
