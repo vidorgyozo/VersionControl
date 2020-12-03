@@ -88,8 +88,30 @@ namespace Week04
                 values[flatNum, 5] = f.NumberOfRooms;
                 values[flatNum, 6] = f.FloorArea;
                 values[flatNum, 7] = f.Price;
-                values[flatNum, 8] = f.Price / f.FloorArea;
+                values[flatNum, 8] = String.Format("={0}*1000000/{1}", GetCell(flatNum + 2, 8), GetCell(flatNum + 2, 7));
+                flatNum++;
             }
+
+            xlWorksheet.get_Range(
+                GetCell(2, 1),
+                GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+        }
+
+        private string GetCell(int x, int y)
+        {
+            string ExcelCoordinate = "";
+            int dividend = y;
+            int modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                ExcelCoordinate = Convert.ToChar(65 + modulo).ToString() + ExcelCoordinate;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+            ExcelCoordinate += x.ToString();
+
+            return ExcelCoordinate;
         }
 
         private void LoadData()
