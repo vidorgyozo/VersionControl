@@ -16,7 +16,7 @@ namespace week05
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
 
-        List<PortfolioItem> Portfolio;
+        List<PortfolioItem> Portfolio = new List<PortfolioItem>();
 
 
         public Form1()
