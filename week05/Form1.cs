@@ -30,7 +30,11 @@ namespace week05
 
         private void CreatePortfolio()
         {
-            throw new NotImplementedException();
+            Portfolio.Add(new PortfolioItem() { Index = "OTP", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ZWACK", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ELMU", Volume = 10 });
+
+            dataGridView2.DataSource = Portfolio;
         }
     }
 }
