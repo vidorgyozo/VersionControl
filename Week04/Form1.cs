@@ -23,6 +23,9 @@ namespace Week04
         Excel.Workbook xlWorkbook;
         Excel.Worksheet xlWorksheet;
 
+        string[] headers;
+        object[,] values;
+
         public Form1()
         {
             InitializeComponent();
@@ -42,6 +45,7 @@ namespace Week04
                 xlWorksheet = xlWorkbook.ActiveSheet;
 
                 CreateTable();
+                FormatTable();
 
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
@@ -58,9 +62,36 @@ namespace Week04
             }
         }
 
+        private void FormatTable()
+        {
+            Excel.Range headerRange = xlWorksheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range dataRange = xlWorksheet.get_Range(
+                GetCell(2, 1),
+                GetCell(1 + values.GetLength(0), values.GetLength(1)));
+            dataRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range firstColDataRange = xlWorksheet.get_Range(GetCell(2, 1), GetCell(1 + values.GetLength(0), 1));
+            firstColDataRange.Font.Bold = true;
+            firstColDataRange.Interior.Color = Color.LightYellow;
+
+            Excel.Range lastColDataRange = xlWorksheet.get_Range(
+                GetCell(2, values.GetLength(1)),
+                GetCell(1 + values.GetLength(0), values.GetLength(1)));
+            lastColDataRange.Interior.Color = Color.LightGreen;
+            lastColDataRange.NumberFormat = "0.00";
+        }
+
         private void CreateTable()
         {
-            string[] headers = new string[] {
+            headers = new string[] {
                 "Kód",
                 "Eladó",
                 "Oldal",
@@ -75,7 +106,7 @@ namespace Week04
                 xlWorksheet.Cells[1, i + 1] = headers[i];
             }
 
-            object[,] values = new object[Flats.Count, headers.Length];
+            values = new object[Flats.Count, headers.Length];
 
             int flatNum = 0;
             foreach (Flat f in Flats)
