@@ -18,12 +18,17 @@ namespace week07
         List<BirthChance> BirthChances = new List<BirthChance>();
         List<DeathChance> DeathChances = new List<DeathChance>();
 
+        List<int> MalePop = new List<int>();
+        List<int> FemalePop = new List<int>();
+
         Random rng = new Random(1234);
 
         public Form1()
         {
             InitializeComponent();
 
+            endYearNumeric.Minimum = 2005;
+            endYearNumeric.Maximum = 3000;
             endYearLabel.Text = Resource1.EndYear;
             endYearNumeric.Value = 2024;
             fileLabel.Text = Resource1.PopulationFile;
@@ -37,7 +42,9 @@ namespace week07
 
         private void RunSim()
         {
-
+            richTextBox1.Clear();
+            MalePop.Clear();
+            FemalePop.Clear();
 
             Population = GetPopulation(fileTextBox.Text);
             for (int year = 2005; year <= endYearNumeric.Value; year++)
@@ -48,15 +55,30 @@ namespace week07
                     SimStep(year, Population[i]);
                 }
 
-                int nbrOfMales = (from x in Population
+                int numOfMales = (from x in Population
                                   where x.Gender == Gender.Male && x.IsAlive
                                   select x).Count();
-                int nbrOfFemales = (from x in Population
+                int numOfFemales = (from x in Population
                                     where x.Gender == Gender.Female && x.IsAlive
                                     select x).Count();
                 Console.WriteLine(
-                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, numOfMales, numOfFemales));
+
+                MalePop.Add(numOfMales);
+                FemalePop.Add(numOfFemales);
             }
+
+            DisplayResults();
+        }
+
+        private void DisplayResults()
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < MalePop.Count; i++)
+            {
+                sb.AppendLine(String.Format("Szimulációs év: {0}\n\tFiúk: {1}\n\tLányok: {2}\n", 2005 + i, MalePop[i], FemalePop[i]));
+            }
+            richTextBox1.Text = sb.ToString();
         }
 
         private void SimStep(int year, Person person)
@@ -157,12 +179,18 @@ namespace week07
 
         private void browseButton_Click(object sender, EventArgs e)
         {
-
+            SelectPopulationFile();
         }
 
         private void SelectPopulationFile()
         {
-
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Comma separated values (*.csv) | *.csv";
+            dialog.DefaultExt = ".csv";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                fileTextBox.Text = dialog.FileName;
+            }
         }
     }
 }
