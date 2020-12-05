@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 using week06.Entities;
 using week06.MnbServiceReference;
@@ -24,13 +25,38 @@ namespace week06
         {
             InitializeComponent();
 
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            Rates.Clear();
+
             GetExchangeRates();
 
             ratesDataGrid.DataSource = Rates;
 
             ProcessXml();
 
+            ShowChart();
+        }
 
+        private void ShowChart()
+        {
+            ratesChart.DataSource = Rates;
+            var series = ratesChart.Series[0];
+            series.ChartType = SeriesChartType.Line;
+            series.XValueMember = "Date";
+            series.YValueMembers = "Value";
+
+            var area = ratesChart.ChartAreas[0];
+            var legend = ratesChart.Legends[0];
+
+            series.BorderWidth = 2;
+            legend.Enabled = false;
+            area.AxisX.MajorGrid.Enabled = false;
+            area.AxisY.MajorGrid.Enabled = false;
+            area.AxisY.IsStartedFromZero = false;
         }
 
         private void ProcessXml()
@@ -56,15 +82,30 @@ namespace week06
         {
             MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
             GetExchangeRatesRequestBody request = new GetExchangeRatesRequestBody();
-            request.currencyNames = "EUR";
-            request.startDate = "2020-01-01";
-            request.endDate = "2020-06-30";
+            request.currencyNames = comboBox1.SelectedItem.ToString();
+            request.startDate = startTimePicker.Value.ToString();
+            request.endDate = endTimePicker.Value.ToString();
 
             GetExchangeRatesResponseBody response = mnbService.GetExchangeRates(request);
 
             xmlResult = response.GetExchangeRatesResult;
 
             richTextBox1.Text = xmlResult;
+        }
+
+        private void startTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void endTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }
