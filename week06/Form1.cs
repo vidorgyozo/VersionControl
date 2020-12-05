@@ -18,14 +18,47 @@ namespace week06
     {
 
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
+
 
         string xmlResult;
+        string currenciesXmlResult;
 
         public Form1()
         {
             InitializeComponent();
 
+            GetCurrenciesRequest();
+
+
             RefreshData();
+        }
+
+        private void GetCurrenciesRequest()
+        {
+
+            MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
+            GetCurrenciesRequestBody request = new GetCurrenciesRequestBody();
+
+            GetCurrenciesResponseBody response = mnbService.GetCurrencies(request);
+
+            currenciesXmlResult = response.GetCurrenciesResult;
+
+            richTextBox1.Text = currenciesXmlResult;
+
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(currenciesXmlResult);
+
+            XmlElement currenciesElement = (XmlElement)(xml.DocumentElement.FirstChild);
+
+            foreach (XmlNode child in currenciesElement.ChildNodes)
+            {
+                Currencies.Add(child.InnerText);
+
+            }
+
+
+            comboBox1.DataSource = Currencies;
         }
 
         private void RefreshData()
@@ -69,12 +102,15 @@ namespace week06
                 RateData rateD = new RateData();
                 Rates.Add(rateD);
                 rateD.Date = DateTime.Parse(element.GetAttribute("date"));
-                rateD.Currency = ((XmlElement)(element.ChildNodes[0])).GetAttribute("curr");
-                rateD.Value = decimal.Parse(element.ChildNodes[0].InnerText) / decimal.Parse(((XmlElement)(element.ChildNodes[0])).GetAttribute("unit"));
+                var childElement = (XmlElement)element.ChildNodes[0];
+                if (childElement == null)
+                    continue;
+                rateD.Currency = childElement.GetAttribute("curr");
+                rateD.Value = decimal.Parse(element.ChildNodes[0].InnerText) / decimal.Parse(childElement.GetAttribute("unit"));
 
 
             }
-            
+
 
         }
 
@@ -90,7 +126,7 @@ namespace week06
 
             xmlResult = response.GetExchangeRatesResult;
 
-            richTextBox1.Text = xmlResult;
+            //richTextBox1.Text = xmlResult;
         }
 
         private void startTimePicker_ValueChanged(object sender, EventArgs e)
