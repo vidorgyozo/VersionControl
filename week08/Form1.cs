@@ -7,17 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using week08.Abstractions;
 using week08.Entities;
 
 namespace week08
 {
     public partial class Form1 : Form
     {
-        List<Ball> _balls = new List<Ball>();
+        List<Toy> _toys = new List<Toy>();
 
-        private BallFactory _factory;
+        private IToyFactory _factory;
 
-        public BallFactory Factory
+        public IToyFactory Factory
         {
             get { return _factory; }
             set { _factory = value; }
@@ -31,29 +32,29 @@ namespace week08
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            Ball newBall = Factory.CreateNew();
-            _balls.Add(newBall);
-            mainPanel.Controls.Add(newBall);
-            newBall.Left = -newBall.Width;
+            Toy newToy = Factory.CreateNew();
+            _toys.Add(newToy);
+            mainPanel.Controls.Add(newToy);
+            newToy.Left = -newToy.Width;
         }
 
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             int maxPos = 0;
-            foreach (Ball ball in _balls)
+            foreach (Toy toy in _toys)
             {
-                ball.MoveBall();
-                if (maxPos < ball.Left)
+                toy.MoveToy();
+                if (maxPos < toy.Left)
                 {
-                    maxPos = ball.Left;
+                    maxPos = toy.Left;
                 }
             }
 
             if(maxPos > 1000)
             {
-                Ball oldestBall = _balls[0];
-                mainPanel.Controls.Remove(oldestBall);
-                _balls.Remove(oldestBall);
+                Toy oldestToy = _toys[0];
+                mainPanel.Controls.Remove(oldestToy);
+                _toys.Remove(oldestToy);
             }
         }
     }
