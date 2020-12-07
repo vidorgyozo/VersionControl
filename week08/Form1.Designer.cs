@@ -36,6 +36,9 @@
             this.carButton = new System.Windows.Forms.Button();
             this.comingNextLabel = new System.Windows.Forms.Label();
             this.colorButton = new System.Windows.Forms.Button();
+            this.presentButton = new System.Windows.Forms.Button();
+            this.ribColButton = new System.Windows.Forms.Button();
+            this.boxColButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -91,14 +94,43 @@
             this.colorButton.Name = "colorButton";
             this.colorButton.Size = new System.Drawing.Size(75, 23);
             this.colorButton.TabIndex = 4;
-            this.colorButton.Text = "button1";
             this.colorButton.UseVisualStyleBackColor = false;
+            // 
+            // presentButton
+            // 
+            this.presentButton.Location = new System.Drawing.Point(13, 43);
+            this.presentButton.Name = "presentButton";
+            this.presentButton.Size = new System.Drawing.Size(75, 23);
+            this.presentButton.TabIndex = 5;
+            this.presentButton.Text = "button1";
+            this.presentButton.UseVisualStyleBackColor = true;
+            // 
+            // ribColButton
+            // 
+            this.ribColButton.BackColor = System.Drawing.Color.Lime;
+            this.ribColButton.Location = new System.Drawing.Point(531, 43);
+            this.ribColButton.Name = "ribColButton";
+            this.ribColButton.Size = new System.Drawing.Size(75, 23);
+            this.ribColButton.TabIndex = 6;
+            this.ribColButton.UseVisualStyleBackColor = false;
+            // 
+            // boxColButton
+            // 
+            this.boxColButton.BackColor = System.Drawing.Color.Red;
+            this.boxColButton.Location = new System.Drawing.Point(613, 43);
+            this.boxColButton.Name = "boxColButton";
+            this.boxColButton.Size = new System.Drawing.Size(75, 23);
+            this.boxColButton.TabIndex = 7;
+            this.boxColButton.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1126, 692);
+            this.Controls.Add(this.boxColButton);
+            this.Controls.Add(this.ribColButton);
+            this.Controls.Add(this.presentButton);
             this.Controls.Add(this.colorButton);
             this.Controls.Add(this.comingNextLabel);
             this.Controls.Add(this.carButton);
@@ -120,6 +152,9 @@
         private System.Windows.Forms.Button carButton;
         private System.Windows.Forms.Label comingNextLabel;
         private System.Windows.Forms.Button colorButton;
+        private System.Windows.Forms.Button presentButton;
+        private System.Windows.Forms.Button ribColButton;
+        private System.Windows.Forms.Button boxColButton;
     }
 }
 

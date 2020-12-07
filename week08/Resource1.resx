@@ -126,4 +126,7 @@
   <data name="ComingNext" xml:space="preserve">
     <value>Coming Next:</value>
   </data>
+  <data name="Present" xml:space="preserve">
+    <value>PRESENT</value>
+  </data>
 </root>

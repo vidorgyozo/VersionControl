@@ -86,5 +86,14 @@ namespace week08 {
                 return ResourceManager.GetString("ComingNext", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PRESENT.
+        /// </summary>
+        internal static string Present {
+            get {
+                return ResourceManager.GetString("Present", resourceCulture);
+            }
+        }
     }
 }

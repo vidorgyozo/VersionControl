@@ -37,10 +37,23 @@ namespace week08
             ballButton.Text = Resource1.Ball;
             carButton.Text = Resource1.Car;
             comingNextLabel.Text = Resource1.ComingNext;
+            presentButton.Text = Resource1.Present;
 
             ballButton.Click += BallButton_Click;
             carButton.Click += CarButton_Click;
             colorButton.Click += ColorButton_Click;
+            presentButton.Click += PresentButton_Click;
+            ribColButton.Click += ColorButton_Click;
+            boxColButton.Click += ColorButton_Click;
+        }
+
+        private void PresentButton_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory()
+            {
+                RibbonColor = ribColButton.BackColor,
+                BoxColor = boxColButton.BackColor
+            };
         }
 
         private void ColorButton_Click(object sender, EventArgs e)
