@@ -16,17 +16,39 @@ namespace week08
     {
         List<Toy> _toys = new List<Toy>();
 
+        Toy _nextToy;
+
         private IToyFactory _factory;
 
         public IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set
+            {
+                _factory = value;
+                DisplayNext();
+            }
         }
 
         public Form1()
         {
             InitializeComponent();
+            Factory = new BallFactory();
+            ballButton.Text = Resource1.Ball;
+            carButton.Text = Resource1.Car;
+            comingNextLabel.Text = Resource1.ComingNext;
+
+            ballButton.Click += BallButton_Click;
+            carButton.Click += CarButton_Click;
+        }
+
+        private void CarButton_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        private void BallButton_Click(object sender, EventArgs e)
+        {
             Factory = new BallFactory();
         }
 
@@ -50,12 +72,24 @@ namespace week08
                 }
             }
 
-            if(maxPos > 1000)
+            if (maxPos > 1000)
             {
                 Toy oldestToy = _toys[0];
                 mainPanel.Controls.Remove(oldestToy);
                 _toys.Remove(oldestToy);
             }
+        }
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+            {
+                this.Controls.Remove(_nextToy);
+            }
+            _nextToy = Factory.CreateNew();
+            _nextToy.Left = comingNextLabel.Left + 75;
+            _nextToy.Top = 5;
+            this.Controls.Add(_nextToy);
         }
     }
 }
