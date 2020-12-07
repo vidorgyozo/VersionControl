@@ -22,6 +22,8 @@ namespace week10
         int nbrOfStepsIncrement = 10;
         int generation = 1;
 
+        Brain winnerBrain = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -45,6 +47,16 @@ namespace week10
 
         private void Gc_GameOver(object sender)
         {
+            var winners = from p in topPerformers
+                          where p.IsWinner
+                          select p;
+            if (winners.Count() > 0)
+            {
+                winnerBrain = winners.FirstOrDefault().Brain.Clone();
+                gc.GameOver -= Gc_GameOver;
+                return;
+            }
+
             generation++;
             label1.Text = string.Format(
             "{0}. generáció",
