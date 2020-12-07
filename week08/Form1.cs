@@ -60,7 +60,10 @@ namespace week08
 
         private void BallButton_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory()
+            {
+                BallColor = colorButton.BackColor
+            };
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
