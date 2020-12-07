@@ -30,6 +30,7 @@ namespace week10
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.startButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -41,11 +42,22 @@ namespace week10
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
+            // startButton
+            // 
+            this.startButton.Location = new System.Drawing.Point(250, 4);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.TabIndex = 1;
+            this.startButton.Text = "START";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -57,6 +69,7 @@ namespace week10
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button startButton;
     }
 }
 

@@ -31,6 +31,7 @@ namespace week10
             label1.Text = string.Format(
             "{0}. generáció",
             generation);
+            startButton.Click += StartButton_Click;
 
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
@@ -45,8 +46,22 @@ namespace week10
             gc.Start(false);
         }
 
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            gc.ResetCurrentLevel();
+            gc.AddPlayer(winnerBrain.Clone());
+            gc.AddPlayer();
+            ga.Focus();
+            gc.Start(true);
+        }
+
         private void Gc_GameOver(object sender)
         {
+            var playerList = from p in gc.GetCurrentPlayers()
+                             orderby p.GetFitness() descending
+                             select p;
+            var topPerformers = playerList.Take(populationSize / 2).ToList();
+
             var winners = from p in topPerformers
                           where p.IsWinner
                           select p;
@@ -54,6 +69,7 @@ namespace week10
             {
                 winnerBrain = winners.FirstOrDefault().Brain.Clone();
                 gc.GameOver -= Gc_GameOver;
+                startButton.Visible = true;
                 return;
             }
 
@@ -62,10 +78,7 @@ namespace week10
             "{0}. generáció",
             generation);
 
-            var playerList = from p in gc.GetCurrentPlayers()
-                             orderby p.GetFitness() descending
-                             select p;
-            var topPerformers = playerList.Take(populationSize / 2).ToList();
+            
 
             gc.ResetCurrentLevel();
             foreach (var p in topPerformers)
