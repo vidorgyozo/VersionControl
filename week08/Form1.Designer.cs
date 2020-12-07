@@ -35,6 +35,7 @@
             this.ballButton = new System.Windows.Forms.Button();
             this.carButton = new System.Windows.Forms.Button();
             this.comingNextLabel = new System.Windows.Forms.Label();
+            this.colorButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -83,11 +84,22 @@
             this.comingNextLabel.TabIndex = 3;
             this.comingNextLabel.Text = "label1";
             // 
+            // colorButton
+            // 
+            this.colorButton.BackColor = System.Drawing.Color.Purple;
+            this.colorButton.Location = new System.Drawing.Point(531, 12);
+            this.colorButton.Name = "colorButton";
+            this.colorButton.Size = new System.Drawing.Size(75, 23);
+            this.colorButton.TabIndex = 4;
+            this.colorButton.Text = "button1";
+            this.colorButton.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1126, 692);
+            this.Controls.Add(this.colorButton);
             this.Controls.Add(this.comingNextLabel);
             this.Controls.Add(this.carButton);
             this.Controls.Add(this.ballButton);
@@ -107,6 +119,7 @@
         private System.Windows.Forms.Button ballButton;
         private System.Windows.Forms.Button carButton;
         private System.Windows.Forms.Label comingNextLabel;
+        private System.Windows.Forms.Button colorButton;
     }
 }
 

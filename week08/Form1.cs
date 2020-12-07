@@ -40,6 +40,17 @@ namespace week08
 
             ballButton.Click += BallButton_Click;
             carButton.Click += CarButton_Click;
+            colorButton.Click += ColorButton_Click;
+        }
+
+        private void ColorButton_Click(object sender, EventArgs e)
+        {
+            Button colButton = (Button)sender;
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = colButton.BackColor;
+            if (colorDialog.ShowDialog() != DialogResult.OK) return;
+
+            colButton.BackColor = colorDialog.Color;
         }
 
         private void CarButton_Click(object sender, EventArgs e)
