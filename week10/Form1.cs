@@ -33,7 +33,18 @@ namespace week10
             {
                 gc.AddPlayer(nbrOfSteps);
             }
+
+            gc.GameOver += Gc_GameOver;
+
             gc.Start(false);
+        }
+
+        private void Gc_GameOver(object sender)
+        {
+            generation++;
+            label1.Text = string.Format(
+            "{0}. generáció",
+            generation);
         }
     }
 }
